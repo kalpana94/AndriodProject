@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.e_collegeapp.Adapter.CitiesAdapter;
 import com.example.e_collegeapp.Adapter.StatesAdapter;
@@ -23,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CitiesActivity extends AppCompatActivity {
+public class CitiesActivity extends AppCompatActivity implements OnRecyclerItemClickListener {
     Cities cities;
 
     FirebaseUser firebaseUser;
@@ -77,10 +78,17 @@ public class CitiesActivity extends AppCompatActivity {
 
                             recyclerView.setLayoutManager(linearLayoutManager);
                         }else{
-
+                            Toast.makeText(CitiesActivity.this, "Some Error", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        this.position = position;
+        cities = citiesArrayList.get(position);
+        Toast.makeText(this,"You Clicked on Position:"+position,Toast.LENGTH_LONG).show();
     }
 }

@@ -44,6 +44,7 @@ public class AddCoursesActivity extends AppCompatActivity  implements View.OnCli
 
     }
     void saveCoursesCloudInDb(){
+        firebaseUser = auth.getCurrentUser();
         db.collection("Colleges").document(firebaseUser.getUid())
                 .collection("Courses").add(courses)
                 .addOnCompleteListener(this, new OnCompleteListener<DocumentReference>() {

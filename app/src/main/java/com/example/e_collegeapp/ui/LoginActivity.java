@@ -37,9 +37,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setCancelable(false);
 
         auth = FirebaseAuth.getInstance();
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(LoginActivity .this, MainActivity.class));
+        }
     }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +50,35 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        String email = eTxtEmail.getText().toString().trim();
+        if(!email.matches("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}"+
+                "\\@"+
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}"+
+                "("+
+                "\\."+
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}"+
+                ")+")){
+            eTxtEmail.setError("Invalid Email Address");
+        }
+        if (eTxtPassword.getText().toString().trim().length() < 6) {
+            eTxtPassword.setError("Minimum 6 Letters!!");
+        }
+        if (eTxtEmail.getText().toString().trim().length() == 0) {
+            eTxtEmail.setError("Email is not entered");
+            eTxtEmail.requestFocus();
+        }
+        if (eTxtPassword.getText().toString().trim().length() == 0) {
+            eTxtPassword.setError("Password is not entered");
+            eTxtPassword.requestFocus();
+        }
+        else {
+            colleges.email = eTxtEmail.getText().toString();
+            colleges.password = eTxtPassword.getText().toString();
+            loginUser();
+        }
         colleges.email = eTxtEmail.getText().toString();
         colleges.password = eTxtPassword.getText().toString();
         Toast.makeText(getApplicationContext(),"Login Clicked",Toast.LENGTH_LONG).show();
-        loginUser();
     }
     void loginUser(){
         progressDialog.show();
@@ -62,13 +88,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Log.i("test",FirebaseAuth.getInstance().getUid());
-                    Toast.makeText(getApplicationContext(),FirebaseAuth.getInstance().getUid(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                   startActivity(intent);
+                    startActivity(intent);
                     finish();
                 }else {
-                    Toast.makeText(getApplicationContext(),"Error "+task.getException().toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
                 }
             }
         });

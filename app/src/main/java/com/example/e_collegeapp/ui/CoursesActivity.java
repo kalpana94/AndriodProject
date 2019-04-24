@@ -62,9 +62,10 @@ public class CoursesActivity extends AppCompatActivity implements OnRecyclerItem
         fetchCoursesFromCloudDb();
     }
     void fetchCoursesFromCloudDb() {
+
       Toast.makeText(CoursesActivity.this,"Uid is there",Toast.LENGTH_LONG).show();
         db.collection("Colleges")
-                .document(firebaseUser.getUid()).collection("Courses").get()
+                    .document(firebaseUser.getUid()).collection("Courses").get()
                 .addOnCompleteListener(this, new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

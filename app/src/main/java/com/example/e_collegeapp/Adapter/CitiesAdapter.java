@@ -56,7 +56,7 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.ViewHolder
     public int getItemCount() {
         return objects.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtTitle;
 
         public ViewHolder(@NonNull View itemView) {

@@ -109,7 +109,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     void saveUserInCloudDB() {
-        db.collection("Colleges").add(colleges)
+        db.collection("Colleges").document(firebaseUser.getUid()).collection("users").add(colleges)
                 .addOnCompleteListener(this, new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {

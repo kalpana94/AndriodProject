@@ -1,5 +1,6 @@
 package com.example.e_collegeapp.ui;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -34,12 +35,15 @@ import java.util.jar.Attributes;
 
 import io.opencensus.stats.View;
 
-public class AllCollegeActivity extends AppCompatActivity  implements OnRecyclerItemClickListener{
+public class AllCollegeActivity extends AppCompatActivity  implements OnRecyclerItemClickListener {
     RecyclerView recyclerView;
     ArrayList<Colleges> colleges;
     int position;
     CollegeAdapter collegeAdapter;
     Colleges college;
+
+    Courses course;
+
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -55,6 +59,7 @@ public class AllCollegeActivity extends AppCompatActivity  implements OnRecycler
         firebaseUser = firebaseAuth.getCurrentUser();
 
         college = new Colleges();
+        course = new Courses();
 
 
     }
@@ -64,10 +69,10 @@ public class AllCollegeActivity extends AppCompatActivity  implements OnRecycler
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_college);
         initViews();
-        if(Util.isInternetConnected(this)) {
+        if (Util.isInternetConnected(this)) {
             fetchCollegesFromCloudDb();
-        }else{
-            Toast.makeText(AllCollegeActivity.this,"Please Connect to Internet and Try Again",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(AllCollegeActivity.this, "Please Connect to Internet and Try Again", Toast.LENGTH_LONG).show();
         }
         fetchCollegesFromCloudDb();
 
@@ -108,6 +113,7 @@ public class AllCollegeActivity extends AppCompatActivity  implements OnRecycler
 
                 });
     }
+
     void showCollegeDetails() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(college.name + "Details:");
@@ -116,27 +122,29 @@ public class AllCollegeActivity extends AppCompatActivity  implements OnRecycler
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-    void deleteCollegesFromCloudDB(){
+
+    void deleteCollegesFromCloudDB() {
         db.collection("colleges").document(firebaseUser.getUid())
                 .collection("users").document(college.docID)
                 .delete()
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isComplete()){
-                            Toast.makeText(AllCollegeActivity.this,"Deletion Finished",Toast.LENGTH_LONG).show();
+                        if (task.isComplete()) {
+                            Toast.makeText(AllCollegeActivity.this, "Deletion Finished", Toast.LENGTH_LONG).show();
                             colleges.remove(position);
 
-                          //  CollegeAdapter.notifyDataSetChanged();; // Refresh Your RecyclerView
-                        }else{
-                            Toast.makeText(AllCollegeActivity.this,"Deletion Failed",Toast.LENGTH_LONG).show();
+                            //  CollegeAdapter.notifyDataSetChanged();; // Refresh Your RecyclerView
+                        } else {
+                            Toast.makeText(AllCollegeActivity.this, "Deletion Failed", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
-    void askForDeletion(){
+
+    void askForDeletion() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete "+college.name);
+        builder.setTitle("Delete " + college.name);
         builder.setMessage("Are You Sure ?");
         builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
@@ -144,10 +152,11 @@ public class AllCollegeActivity extends AppCompatActivity  implements OnRecycler
                 deleteCollegesFromCloudDB();
             }
         });
-        builder.setNegativeButton("Cancel",null);
+        builder.setNegativeButton("Cancel", null);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
     void showOptions() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String[] items = {"View " + college.name, "Update " + college.name, "Delete " + college.name, "Cancel"};
@@ -175,18 +184,46 @@ public class AllCollegeActivity extends AppCompatActivity  implements OnRecycler
         dialog.show();
 
     }
+
     @Override
     public void onItemClick(int position) {
         this.position = position;
         college = colleges.get(position);
-        Toast.makeText(this,"You Clicked on Position:"+position,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "You Clicked on Position:" + position, Toast.LENGTH_LONG).show();
         showCollegeDetails();
-        Intent intent = new Intent(AllCollegeActivity.this,AddCoursesActivity.class);
+        Intent intent = new Intent(AllCollegeActivity.this, AddCoursesActivity.class);
         startActivity(intent);
         finish();
         showOptions();
     }
 
+    void showdialogforCourses() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String[] items = {"Add Courses " + course.Name, "View Courses " + course.Name, "Delete Courses " + course.Name, "College Info "+ course.Name};
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        showCollegeDetails();
+                        break;
+
+                    case 1:
+                        Intent intent = new Intent(AllCollegeActivity.this, CollegeActivity.class);
+                        intent.putExtra("keyColleges", colleges);
+                        startActivity(intent);
+                        break;
+
+                    case 2:
+                        askForDeletion();
+                        break;
+                }
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
 }
 
 

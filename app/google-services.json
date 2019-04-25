@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "124741972459",
+    "firebase_url": "https://ecollege-fc7fc.firebaseio.com",
+    "project_id": "ecollege-fc7fc",
+    "storage_bucket": "ecollege-fc7fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124741972459:android:7ac41867a6ce1a0d",
+        "android_client_info": {
+          "package_name": "com.example.e_collegeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124741972459-1kekfl83cqres6cb8tjuv3q0cef6220h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjEp7oszZ1XB5FVGdNDyRmdQab2OB3SKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124741972459-1kekfl83cqres6cb8tjuv3q0cef6220h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

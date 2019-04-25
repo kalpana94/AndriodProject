@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    tools:context=".ui.InfoActivity">
+
+    <TextView
+        android:id="@+id/textViewtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="INFO"
+        android:textSize="20dp"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="166dp"
+        android:layout_marginTop="16dp"
+        tools:layout_editor_absoluteY="97dp" />
+
+    <TextView
+        android:id="@+id/textViewDeadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deadline"
+        android:textSize="20dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorBlack"/>
+
+    <TextView
+        android:id="@+id/textViewFees"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fees"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/textViewContact_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="16dp"
+        android:hint="Contact_Us" />
+
+    <TextView
+        android:id="@+id/textViewcollege_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="16dp"
+        android:text="College Info" />
+
+    <EditText
+        android:id="@+id/editTextinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="16dp"
+        android:inputType="textMultiLine" />
+
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    tools:context=".ui.AddStatesActivity">
+
+    <TextView
+        android:id="@+id/textViewtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add States"
+        android:textSize="16dp"
+        android:gravity="center"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="20dp"
+        tools:layout_editor_absoluteX="131dp"
+        tools:layout_editor_absoluteY="33dp" />
+
+    <EditText
+        android:id="@+id/editTextstatename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="20dp"
+        android:inputType="textPersonName"
+        android:text="States Name" />
+
+    <Button
+        android:id="@+id/buttonsubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="20dp"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/buttonview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:textColor="@color/colorBlack"
+        android:layout_marginTop="20dp"
+        android:text="View States" />
+
+</android.support.v7.widget.LinearLayoutCompat>
